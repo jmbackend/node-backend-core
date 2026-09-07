@@ -93,3 +93,26 @@ test("request context remains isolated across concurrent async handlers", async 
     expect(new Set(results.map(r => r.body.id)).size).toBe(5);
     results.forEach(r => expect(r.body.id).toBe(r.headers["x-request-id"]));
 });
+
+test("passes one shared EventBus instance to the application and fake modules", async () => {
+    const directory = path.join(f.root, "event-module");
+    fs.mkdirSync(directory);
+    fs.writeFileSync(path.join(directory, "index.js"), `module.exports = {
+        name: "event-module", version: "1.0.0",
+        register() {},
+        async boot(context) { await context.eventBus.emitAsync("test.created", { id: 123 }); }
+    };`);
+    const received = jest.fn();
+    await createApp({
+        sequelize: db,
+        logger: logger(),
+        modulesDirectory: f.root,
+        registerHooks(context) {
+            context.eventBus.on("test.created", received);
+        }
+    }).then(created => { app = created; });
+
+    expect(received).toHaveBeenCalledWith({ id: 123 });
+    expect(app.locals.context.eventBus).toBe(app.locals.moduleLoader.context.eventBus);
+    expect(app.locals.context.eventBus.listenerCount("test.created")).toBe(1);
+});
