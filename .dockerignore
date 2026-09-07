@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+*.log
+logs
+src/logs
+.env
+.env.*
+coverage
+migration-backup
+uploads
+.git
+.gitignore
+README.md
+tests
+docs
+docker-compose.yml
