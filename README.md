@@ -135,7 +135,7 @@ Requirements:
 - Docker and Docker Compose (optional)
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/jmbackend/node-backend-core.git
 cd node-backend-core
 npm install
 cp .env.example .env
