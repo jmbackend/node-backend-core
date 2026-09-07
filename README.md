@@ -1,6 +1,6 @@
 # Node Backend Core
 
-[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
+[![CI](https://github.com/jmbackend/node-backend-core/actions/workflows/ci.yml/badge.svg)](https://github.com/jmbackend/node-backend-core/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
